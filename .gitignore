@@ -39,3 +39,4 @@ $RECYCLE.BIN/
 # ===== Simulink / 仿真大文件（按需解除注释）=====
 # *.slx
 # *.mdl
+*.ans

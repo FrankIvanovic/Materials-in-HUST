@@ -1,0 +1,12 @@
+# LaTeX 构建产物
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+render/
+run_log.txt

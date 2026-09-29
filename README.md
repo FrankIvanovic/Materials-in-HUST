@@ -47,16 +47,21 @@
 - MATLAB 数值计算：绘制线圈三维模型、轴线/截面 B 分布、聚焦性对比。
 - 有限元软件（COMSOL / Ansys Maxwell / FEMM）仿真对比，验证数值结果。
 
-## 仓库结构（规划）
+## 仓库结构
 
 ```
 ├── README.md               % 本文件
-├── 课程论文线圈.pdf          % 题目原文
-├── matlab/                 % MATLAB 计算代码
-├── simulation/             % 有限元仿真文件
-├── docs/                   % 论文、运行说明
-└── figures/                % 结果图
+├── 课程论文线圈.pdf          % 题目原文（pages/ 为其渲染图）
+├── paper/                  % 课程论文（LaTeX，main.pdf 为编译产物）
+└── matlab/                 % 论文用 MATLAB 代码（common/ 通用库 + 论文脚本）
 ```
+
+## 分支说明
+
+- `main`：题目 PDF 与总览（本分支不含论文内容）；
+- `paper/topic-1-circular-coil`：**课题一（圆形线圈）论文分支**——论文
+  LaTeX 源码与编译产物、MATLAB 计算脚本、FEMM 有限元模型与对比结果；
+- `experiment_code`：全部 15 种线圈的通用实验代码库（组内共享）。
 
 ## 运行说明
 
