@@ -1,0 +1,41 @@
+# ===== 派生文件（可由 PDF 重新生成）=====
+pages/
+extracted_text.txt
+
+# ===== MATLAB =====
+*.asv
+*.m~
+*.mex*
+*.autosave
+*.slxc
+*.mltbx
+slprj/
+sccprj/
+sfun/
+cache/
+codegen/
+html/
+*.mat
+
+# ===== MATLAB Toolbox 打包 =====
+*.mlpkginstall
+*.mlappinstall
+
+# ===== Windows =====
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ===== Office 临时文件 =====
+~$*.docx
+~$*.xlsx
+~$*.pptx
+.docx#
+
+# ===== Simulink / 仿真大文件（按需解除注释）=====
+# *.slx
+# *.mdl
