@@ -1,0 +1,187 @@
+% !TEX program = xelatex
+% ============================================================
+% 《电磁场与电磁波》课程论文 —— 课题一：圆形线圈
+% 编译：xelatex -> bibtex -> xelatex -> xelatex
+% 骨架版本：各节为待讨论的提纲与占位内容（[TODO] 标记）
+% ============================================================
+\documentclass[zihao=-4,a4paper]{ctexart}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{siunitx}
+\usepackage[colorlinks,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+
+\graphicspath{{figures/}}
+
+% ---------- 论文信息（待填写） ----------
+\newcommand{\papertitle}{圆形经颅磁刺激线圈的磁场计算与仿真分析}
+\newcommand{\paperauthor}{（姓名、学号待填）}
+\newcommand{\paperdate}{2026 年 9 月}
+
+\title{\heiti \papertitle}
+\author{\paperauthor \\ \small 《电磁场与电磁波》课程论文（课题一：圆形线圈）}
+\date{\paperdate}
+
+\begin{document}
+
+\maketitle
+
+% ============================================================
+% 摘要（待讨论后撰写）
+% ============================================================
+\begin{abstract}
+\textbf{[TODO]} 概括研究对象（圆形线圈：平面螺旋、双层 9 圈、外径
+\SI{115}{mm}、内径 \SI{30}{mm}）、理论工具（毕奥--萨伐尔定律离散叠加）、
+MATLAB 数值计算内容（轴线/径向/截面磁场分布）、有限元仿真对比的主要
+结论（偏差量级）与本文主要结果。
+
+\vspace{1em}
+\noindent\textbf{关键词：} 经颅磁刺激；圆形线圈；毕奥--萨伐尔定律；磁场
+分布；有限元仿真
+\end{abstract}
+
+\tableofcontents
+
+% ============================================================
+\section{简介}\label{sec:intro}
+% 讨论要点：
+%   - 经颅磁刺激（TMS）背景：1985 年 Barker 首次实现人体 TMS；
+%     无创、非侵入式刺激神经，用于抑郁症治疗、脑功能研究等。
+%   - 线圈是 TMS 装置的核心部件，其空间磁场分布决定刺激的位置
+%     与聚焦性。圆形线圈是最早、最基本的 TMS 线圈构型。
+%   - 本文任务：针对课题一的圆形线圈（图纸参数见 §\ref{sec:model}），
+%     建立磁场计算模型 → MATLAB 数值计算 → 与有限元仿真对比。
+%   - 论文组织结构一句话预告。
+% ============================================================
+\textbf{[TODO]} 待讨论后撰写：TMS 背景与意义 → 圆形线圈在 TMS 中的
+地位 → 本文的研究内容与论文结构。
+
+% ============================================================
+\section{理论分析与计算模型}\label{sec:model}
+% 讨论要点：
+%   - 线圈几何建模：平面阿基米德螺旋，双层各 9 匝，共 18 匝；
+%     内半径 a_in=15mm，外半径 a_out=57.5mm，径向绕距 Δa 由
+%     内外径与匝数反推（≈5.3mm，待与图纸确认）。
+%   - 层间距离 h：侧视图标注 Φ110 的含义待确认（两层外径不同？）。
+%   - 简化假设：忽略引线段与手柄（R20 颈部、60/40/18 尺寸），
+%     认为磁场主要由螺旋绕组贡献；准静态近似（TMS 电流频率
+%     ~kHz 量级，波长远大于线圈尺寸）。
+% ============================================================
+
+\subsection{毕奥--萨伐尔定律}
+载流导线元 $\mathrm{d}\boldsymbol{l}$ 在空间场点 $\boldsymbol{r}$ 产生的磁感应强度为
+\begin{equation}
+  \mathrm{d}\boldsymbol{B}
+  = \frac{\mu_0}{4\pi}\,\frac{I\,\mathrm{d}\boldsymbol{l}\times\hat{\boldsymbol{r}}}{r^2},
+  \qquad
+  \boldsymbol{B}(\boldsymbol{r}) = \frac{\mu_0 I}{4\pi}
+  \oint_l \frac{\mathrm{d}\boldsymbol{l}\times(\boldsymbol{r}-\boldsymbol{r}')}{|\boldsymbol{r}-\boldsymbol{r}'|^3},
+  \label{eq:bs}
+\end{equation}
+其中 $\mu_0 = 4\pi\times10^{-7}\,\mathrm{H/m}$ 为真空磁导率，$\boldsymbol{r}'$
+为源点（电流元）位置。多匝线圈的总场对全部 $N$ 匝绕组按
+式~\eqref{eq:bs} 叠加。
+
+\subsection{单匝圆环的磁场}
+% 讨论要点：轴线上的解析解作为数值结果的校验基准。
+半径为 $a$ 的单匝圆环载流 $I$，轴线上距环心 $z$ 处：
+\begin{equation}
+  B_z(z) = \frac{\mu_0 I a^2}{2\,(a^2+z^2)^{3/2}},
+  \qquad
+  B_z(0) = \frac{\mu_0 I}{2a}.
+  \label{eq:loop-axis}
+\end{equation}
+离轴场可用椭圆积分表示（占位，待决定是否写入）：
+\textbf{[TODO]} 是否给出 $B_\rho,\,B_z$ 的完整椭圆积分表达式，
+或在正文直接采用数值离散、仅在附录给解析式？
+
+\subsection{线圈计算模型与参数}
+% 讨论要点：参数表中的取值哪些来自图纸、哪些是假设，需逐项确认。
+本文采用圆柱坐标系 $(\rho,\varphi,z)$，线圈中平面位于 $z=0$，
+第 $k$ 层第 $j$ 匝的半径与轴向位置记为 $a_{k,j}$、$z_k$。线圈参数
+汇总于表~\ref{tab:param}。
+
+\begin{table}[htbp]
+  \centering
+  \caption{圆形线圈图纸参数与模型假设}
+  \label{tab:param}
+  \begin{tabular}{llll}
+    \toprule
+    参数 & 符号 & 数值 & 来源 \\
+    \midrule
+    线圈外径 & $D_\mathrm{out}$ & \SI{115}{mm} & 图纸 \\
+    线圈内径 & $D_\mathrm{in}$  & \SI{30}{mm}  & 图纸（$\pm1$） \\
+    层数 & --- & 2 & 图纸 \\
+    每层匝数 & --- & 9 & 图纸 \\
+    总匝数 & $N$ & 18 & 图纸 \\
+    径向绕距 & $\Delta a$ & \SI{5.3}{mm}（待确认） & 由内外径反推 \\
+    层间距离 & $h$ & 待确认（侧视图标 \SI{110}{mm}） & 待确认 \\
+    激励电流 & $I$ & 待定（如归一化 \SI{1}{A} 或实际脉冲峰值） & 待讨论 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+总场为双层螺旋各匝贡献之和：
+\begin{equation}
+  \boldsymbol{B}(\rho,z) = \sum_{k=1}^{2}\sum_{j=1}^{9} \boldsymbol{B}_{k,j}(\rho,z).
+  \label{eq:superpose}
+\end{equation}
+
+% ============================================================
+\section{运用 MATLAB 进行计算及代码}\label{sec:matlab}
+% 讨论要点：
+%   - 离散方案：每匝圆环剖分为 M 段（如 M=720）电流元，直接
+%     按式~\eqref{eq:bs} 叠加；说明收敛性（M 增大结果稳定）。
+%   - 代码结构：参数文件 / 线圈几何生成 / 场计算函数 / 绘图脚本。
+%     列出文件清单与关键代码片段（正文节选，完整代码见提交件）。
+%   - 计算内容：① 轴线 B_z(z)；② 线圈平面内径向 B_z(ρ)；
+%     ③ 典型截面的 B 模云图与磁力线；④ 与单匝解析式
+%     式~\eqref{eq:loop-axis} 的校验。
+% ============================================================
+\textbf{[TODO]} 离散化方法说明与关键代码（\texttt{listings} 排版）。
+
+% ============================================================
+\section{结果分析}\label{sec:results}
+% 讨论要点：
+%   - 图 1：三维线圈模型；图 2：轴线 B_z(z)（解析 vs 数值）；
+%     图 3：平面径向分布；图 4：截面云图；图 5：不同深度的
+%     半高宽（聚焦性）。
+%   - 分析指标：表面峰值、轴向衰减规律（深度~半衰距离）、
+%     径向聚焦半径（FWHM）、有效刺激区域面积。
+%   - 误差讨论：绕距离散化、匝数取整、忽略引线的影响。
+% ============================================================
+\textbf{[TODO]} 待 MATLAB 计算完成后插入图件与分析文字。
+
+% ============================================================
+\section{仿真软件仿真磁场及结果对比分析}\label{sec:fem}
+% 讨论要点：
+%   - 软件选型：COMSOL Multiphysics / Ansys Maxwell / FEMM
+%     （待定，建议选一个，说明理由：如 Maxwell 磁场模块、
+%     FEMM 免费二维轴对称即可满足）。
+%   - 有限元模型：求解域、边界条件（如无穷远/气球边界）、
+%     网格设置、激励设置。
+%   - 对比方式：同一位置轴线曲线叠加对比 + 偏差表
+%     （表面峰值偏差、轴线均方根偏差等），分析差异来源
+%     （网格、离散方案、边界条件）。
+% ============================================================
+\textbf{[TODO]} 待有限元仿真完成后填写。
+
+% ============================================================
+\section{结论}\label{sec:conclusion}
+% 讨论要点：数值方法与 FEM 互相验证的结论；圆形线圈磁场
+% 衰减快、聚焦性差的定性评价（引出后续 8 字线圈等的改进方向）。
+% ============================================================
+\textbf{[TODO]} 待结果完成后撰写。
+
+% ============================================================
+% 参考文献（初稿，待补充/筛选）
+% ============================================================
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\end{document}
