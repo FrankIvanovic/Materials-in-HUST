@@ -65,4 +65,26 @@
 
 ## 运行说明
 
-（待补充：MATLAB 版本、入口脚本、依赖项）
+**MATLAB 计算**（生成论文全部图件与数据）
+
+- 版本：MATLAB R2016b 或更高（实测 R2026a），**无任何 Toolbox 依赖**（完全
+  椭圆积分按 AGM 算法自实现）；
+- 入口脚本（在 `matlab/paper_circular_coil/` 下依次运行）：
+
+  ```matlab
+  main_paper_figures   % 论文图 1–7、全部数值指标与 CSV 导出（约 1 min）
+  run_femm_axis        % FEMM 自动建模求解、导出有限元 CSV（会弹出 FEMM 窗口）
+  compare_femm         % 图 8、有限元解 vs 数值解对比指标
+  ```
+
+- 依赖：仅 `run_femm_axis.m` 需要 **FEMM 4.2**（免费软件，
+  femm.info；不用 MATLAB 自动化时，也可在 FEMM 中 File → Run Lua
+  script 直接运行 `paper_circular_coil/femm/circle_coil_axi.lua`）。
+
+**论文编译**：XeLaTeX（实测 TeX Live 2026），在 `paper/` 目录下
+`xelatex → bibtex → xelatex → xelatex`；依赖宏包（`ctex`、`siunitx`、
+`natbib`、`caption`、`booktabs`、`listings`、`hyperref` 等）TeX Live
+完整安装均自带。
+
+详细说明见 [`matlab/README.md`](matlab/README.md) 与
+[`paper/README.md`](paper/README.md)。

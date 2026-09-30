@@ -1,7 +1,7 @@
 # 课题一：圆形线圈 —— 课程论文（LaTeX）
 
 基于毕奥–萨伐尔定律的圆形 TMS 线圈磁场计算、MATLAB 数值实现与 FEMM
-有限元对比。论文 PDF：`main.pdf`（13 页，已随仓库提交）。
+有限元对比。论文 PDF：`main.pdf`（18 页，已随仓库提交）。
 
 ## 编译方法
 
@@ -14,8 +14,8 @@ xelatex main.tex
 xelatex main.tex
 ```
 
-依赖宏包：`ctex`、`siunitx`、`xcolor`、`booktabs`、`subcaption`、`listings`、
-`hyperref`（TeX Live 完整安装均自带）。
+依赖宏包：`ctex`、`siunitx`、`natbib`（上标引用）、`caption`、`booktabs`、
+`subcaption`、`listings`、`hyperref`（TeX Live 完整安装均自带）。
 
 ## 文件结构
 
