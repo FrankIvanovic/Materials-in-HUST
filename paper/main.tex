@@ -26,10 +26,9 @@
 \numberwithin{table}{section}
 \numberwithin{equation}{section}
 
-% ---------- 代码清单：章节号.序号，中文标签 ----------
+% ---------- 代码清单：章节号.序号（Listing 3.1 …） ----------
 % listings 在 \AtBeginDocument 钩子里才定义 lstlisting 计数器，须同样延后执行
 \AtBeginDocument{\counterwithin{lstlisting}{section}}
-\renewcommand{\lstlistingname}{代码清单}
 
 % ---------- 图表题注：编号与内容间用空格分隔 ----------
 \captionsetup{labelsep=quad}
@@ -46,20 +45,66 @@
 }
 
 % ---------- 论文信息 ----------
-\newcommand{\papertitle}{圆形经颅磁刺激线圈的磁场计算与有限元仿真对比分析}
-\newcommand{\paperauthor}{（姓名、学号待填）}
-\newcommand{\paperdate}{2026 年 9 月}
+\newcommand{\coverbanner}{《电磁场与电磁波》课程论文}
+\newcommand{\papertitle}{圆形线圈的磁场仿真与理论结果对比分析}
+\newcommand{\schoolname}{电子信息与通信学院}   % 院系
+\newcommand{\majorname}{电子信息工程}    % 专业
+\newcommand{\classname}{电信2203班}    % 班级
+\newcommand{\authorname}{蒲奕帆}   % 姓名
+\newcommand{\studentid}{U202213789}    % 学号
+\newcommand{\instructorname}{田加胜} % 指导教师
+\newcommand{\coverdate}{2025 年 11 月 26 日}
 
-\title{\heiti \papertitle}
-\author{\paperauthor \\ \small 《电磁场与电磁波》课程论文（课题一：圆形线圈）}
-\date{\paperdate}
+% 封面字号（参照课程设计报告模板）
+\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
+\newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}
+\newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}
+
+% 重定义 \maketitle 为整页封面（模板样式：校徽 + 报告名 + 标题 + 信息表 + 日期落款）
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+    \begin{center}
+      \vspace*{0em}
+      \includegraphics[height=1.61cm]{HUSTlogo.eps}\\
+      \vspace*{4em}
+      {\xiaochuhao \fangsong \bfseries \coverbanner}\\
+      \vspace*{5em}
+      {\erhao \kaishu \bfseries \papertitle}
+
+      \vspace*{5em}
+      {\sanhao \fangsong
+        \renewcommand\arraystretch{2}
+        \begin{tabular}{lc}
+          \makebox[4em][s]{院 \hfill 系} &
+          \underline{\makebox[12em]{\schoolname}} \\
+          \makebox[4em][s]{专业} &
+          \underline{\makebox[12em]{\majorname}} \\
+          \makebox[4em][s]{班 \hfill 级} &
+          \underline{\makebox[12em]{\classname}} \\
+          \makebox[4em][s]{姓 \hfill 名} &
+          \underline{\makebox[12em]{\authorname}} \\
+          \makebox[4em][s]{学 \hfill 号} &
+          \underline{\makebox[12em]{\studentid}} \\
+          \makebox[4em][s]{指导教师} &
+          \underline{\makebox[12em]{\instructorname}} \\
+          \makebox[4em][s]{日 \hfill 期} &
+          \underline{\makebox[12em]{\coverdate}} \\
+        \end{tabular}
+      }
+
+      \vspace{2em}
+      {\sanhao \fangsong \coverdate}
+    \end{center}
+  \end{titlepage}
+}
+
+\hypersetup{pdftitle={\papertitle},pdfauthor={\authorname}}
 
 \begin{document}
 
 % ---------- 封面（单独成页，不编页码） ----------
 \hypersetup{pageanchor=false}
 \maketitle
-\thispagestyle{empty}
 
 \clearpage
 \hypersetup{pageanchor=true}
