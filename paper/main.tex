@@ -16,9 +16,21 @@
 \usepackage{siunitx}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage[super,square,sort&compress]{natbib}
 \usepackage[colorlinks,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
 
 \graphicspath{{figures/}}
+
+% ---------- 图表编号：章节号.序号（图 4.1、表 2.1 …） ----------
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+
+% ---------- 图表题注：编号与内容间用空格分隔 ----------
+\captionsetup{labelsep=quad}
+
+% ---------- 摘要：标题与一级标题同格式，内容与正文字号相同 ----------
+\renewenvironment{abstract}{\section*{\abstractname}}{}
 
 \lstdefinestyle{mat}{
   language=Matlab, basicstyle=\ttfamily\footnotesize, keywordstyle=\bfseries,
@@ -39,9 +51,17 @@
 
 \begin{document}
 
+% ---------- 封面（单独成页，不编页码） ----------
+\hypersetup{pageanchor=false}
 \maketitle
+\thispagestyle{empty}
 
-% ============================================================
+\clearpage
+\hypersetup{pageanchor=true}
+
+% ---------- 摘要（小写罗马页码 i, ii, …） ----------
+\pagenumbering{roman}
+
 \begin{abstract}
 经颅磁刺激（TMS）是一种无创刺激神经组织的电磁技术，刺激线圈的空间磁场
 分布直接决定刺激的位置与聚焦性。本文针对课题一给出的圆形线圈（平面螺旋、
@@ -64,10 +84,19 @@
 积分；磁场分布；有限元法；FEMM
 \end{abstract}
 
+\clearpage
+
+% ---------- 目录（大写罗马页码 I, II, …） ----------
+\pagenumbering{Roman}
+
 \tableofcontents
-\bigskip
 
 % ============================================================
+\clearpage
+
+% ---------- 正文（阿拉伯页码，从 1 重新编号） ----------
+\pagenumbering{arabic}
+
 \section{简介}\label{sec:intro}
 
 经颅磁刺激（Transcranial Magnetic Stimulation, TMS）利用时变磁场穿透颅骨
@@ -93,6 +122,7 @@
 第 \ref{sec:conclusion} 节给出结论。
 
 % ============================================================
+\clearpage
 \section{理论分析与计算模型}\label{sec:model}
 
 \subsection{毕奥--萨伐尔定律与直线电流单元的闭式解}
@@ -204,6 +234,7 @@ $(\rho,\varphi,z)$，第 $k$ 层螺旋线为
 \end{equation}
 
 % ============================================================
+\clearpage
 \section{运用 MATLAB 进行计算及代码}\label{sec:matlab}
 
 \subsection{程序结构}
@@ -286,6 +317,7 @@ $2.3\times10^{-4}$（$B_z$）与 $1.6\times10^{-4}$（$B_\rho$），已充分收
 \end{table}
 
 % ============================================================
+\clearpage
 \section{结果分析}\label{sec:results}
 
 \subsection{线圈模型与轴线磁场}
@@ -413,6 +445,7 @@ $R\approx\SI{7.8}{m\Omega}$，导线总长 \SI{4.30}{m}。该电感量级与 TMS
 心磁感应强度约 \SI{1.76}{T}。
 
 % ============================================================
+\clearpage
 \section{仿真软件仿真磁场及结果对比分析}\label{sec:fem}
 
 \subsection{FEMM 有限元模型}
@@ -500,6 +533,7 @@ $2\times10^{-4}$）。
 1\% 的水平上相互吻合，验证了计算模型与程序实现的正确性。
 
 % ============================================================
+\clearpage
 \section{结论}\label{sec:conclusion}
 
 本文针对课题一的圆形 TMS 线圈（平面螺旋、双层 9 匝、外径
@@ -525,6 +559,7 @@ $2.3\times10^{-4}$。
 似与一阶单元离散，均远小于工程精度需求。
 
 % ============================================================
+\clearpage
 \bibliographystyle{unsrt}
 \bibliography{ref}
 
